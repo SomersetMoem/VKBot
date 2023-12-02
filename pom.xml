@@ -15,9 +15,27 @@
         <vk.bots.longpoll.api>4.1.8</vk.bots.longpoll.api>
         <org.slf4j.version>2.0.5</org.slf4j.version>
         <org.apache.logging.log4j.version>2.20.0</org.apache.logging.log4j.version>
+        <spring.boot.starter>2.5.5</spring.boot.starter>
     </properties>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.5</version>
+    </parent>
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>com.github.yvasyliev</groupId>
@@ -49,4 +67,13 @@
             <version>${org.apache.logging.log4j.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
