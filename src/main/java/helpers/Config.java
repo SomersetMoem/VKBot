@@ -1,9 +1,15 @@
 package helpers;
 
+import bot.VkBot;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
+@PropertySource("classpath:vk.properties")
 public class Config {
     @Value("${client.secret}")
     private String clientSecret;
@@ -21,5 +27,10 @@ public class Config {
         return "Config{" +
                 "clientSecret='" + clientSecret + '\'' +
                 '}';
+    }
+
+    @Bean
+    public VkBot vkBot(Environment environment) {
+        return new VkBot(environment);
     }
 }

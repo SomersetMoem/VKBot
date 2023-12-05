@@ -5,8 +5,10 @@ import api.longpoll.bots.model.objects.additional.buttons.Button;
 import api.longpoll.bots.model.objects.additional.buttons.TextButton;
 import com.google.gson.JsonObject;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static helpers.DateUtils.getCountDayOfMonth;
@@ -15,17 +17,18 @@ public class SelectDayKeyboard {
     private static final Button.Color PRIMARY_COLOR = Button.Color.PRIMARY;
 
     public Keyboard createKeyBoardSelectDay() {
-        int countDayOfMonth = getCountDayOfMonth();
-        JsonObject payload = new JsonObject();//Сделать по анлогии с селект монтс кейборд
+        int countDayOfMonth = getCountDayOfMonth(1);
+        JsonObject payload = new JsonObject();
 
-        List<Button> buttons = IntStream
-        for (int i = 0; i < countDayOfMonth; i++) {
-            payload.addProperty("selectDayMenu", String.valueOf(countDayOfMonth));
-            Button buttonDay = new TextButton(Button.Color.PRIMARY,
-                    new TextButton.Action(String.valueOf(countDayOfMonth), payload));
-            List<List<Button>> buttonMenu = Arrays.asList(Arrays.asList(buttonDay));
-        }
+        List<Button> buttons = IntStream.range(1, countDayOfMonth + 1)  // исправление: использовать countDayOfMonth + 1
+                .mapToObj(i -> {
+                    payload.addProperty("selectDayMenu", String.valueOf(i));  // исправление: использовать значение i
+                    return new TextButton(PRIMARY_COLOR,
+                            new TextButton.Action(String.valueOf(i), payload));  // исправление: закрыть блок Action
+                })
+                .collect(Collectors.toList());
+
+        List<List<Button>> buttonMenu = new ArrayList<>(Collections.singletonList(buttons));
         return new Keyboard(buttonMenu).setOneTime(true);
     }
-
 }

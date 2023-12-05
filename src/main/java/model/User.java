@@ -35,14 +35,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getDateVisit() {
-        return dateVisit;
-    }
-
-    public void setDateVisit(Date dateVisit) {
-        this.dateVisit = dateVisit;
-    }
-
     public int getPeerId() {
         return peerId;
     }

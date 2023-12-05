@@ -4,6 +4,7 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -14,7 +15,7 @@ public class DateUtils {
     private static final Locale ruLocale = new Locale("ru");
 
 
-    private static int getCountDayOfMonth(int numberMonth) {
+    public static int getCountDayOfMonth(int numberMonth) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MONTH, numberMonth);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
@@ -26,7 +27,7 @@ public class DateUtils {
     }
 
     public static String getNameMonthOfNumber(int month) {
-        return Month.of(month).getDisplayName(?? ,ruLocale);//У меня почему-то не класса TextDisplay
+        return Month.of(month).getDisplayName(TextStyle.SHORT ,ruLocale);//У меня почему-то не класса TextDisplay
     }
 
 

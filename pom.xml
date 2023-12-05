@@ -9,13 +9,14 @@
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <vk.bots.longpoll.api>4.1.8</vk.bots.longpoll.api>
         <org.slf4j.version>2.0.5</org.slf4j.version>
         <org.apache.logging.log4j.version>2.20.0</org.apache.logging.log4j.version>
         <spring.boot.starter>2.5.5</spring.boot.starter>
+        <okhtpp>4.11.0</okhtpp>
     </properties>
 
     <parent>
@@ -29,6 +30,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.11.0</version>
         </dependency>
 
         <dependency>
