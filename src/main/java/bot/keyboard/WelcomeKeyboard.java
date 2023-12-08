@@ -18,6 +18,7 @@ public class WelcomeKeyboard {
     private static final Button.Color PRIMARY_COLOR = Button.Color.PRIMARY;
     private static final Button.Color NEGATIVE_COLOR = Button.Color.NEGATIVE;
     private static final Button.Color SECONDARY_COLOR = Button.Color.SECONDARY;
+
     public static Keyboard createKeyboardWelcomeMenu() {
         JsonObject payload = new JsonObject();
         payload.addProperty("selectMenu", "bookProcedure");
@@ -39,8 +40,8 @@ public class WelcomeKeyboard {
         payload.addProperty("selectMenu", "checkPromotions");
         Button checkPromotions = new TextButton(SECONDARY_COLOR, new TextButton.Action(CHECK_PROMOTIONS_TEXT, payload));
 
-        List<List<Button>> buttonMenu = Arrays.asList(Arrays.asList(bookProcedure, checkMyProcedure, priceList, canselMyProcedure, checkPromotions),
-                Arrays.asList(canselMyProcedure, checkPromotions));
+        List<List<Button>> buttonMenu = Arrays.asList(Arrays.asList(bookProcedure, checkMyProcedure),
+                Arrays.asList(priceList, canselMyProcedure, checkPromotions));
 
         return new Keyboard(buttonMenu).setInline(true);
     }

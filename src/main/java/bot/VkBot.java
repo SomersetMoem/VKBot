@@ -1,55 +1,43 @@
 package bot;
 
 import api.longpoll.bots.LongPollBot;
-import api.longpoll.bots.exceptions.VkApiException;
 import api.longpoll.bots.model.events.messages.MessageNew;
 import api.longpoll.bots.model.objects.basic.Message;
+import bot.service.WelcomeService;
 import helpers.Config;
-import model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
+import lombok.var;
+import org.apache.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-import static bot.keyboard.WelcomeKeyboard.createKeyboardWelcomeMenu;
-
+@Component
 @SpringBootApplication
-@PropertySource("classpath:vk.properties")
 public class VkBot extends LongPollBot {
-    Environment environment;
+    private final Config config;
+    private WelcomeService welcomeMessage = new WelcomeService();
+    private final static Logger LOG = Logger.getLogger(VkBot.class);
 
-    @Autowired
-    public VkBot(Environment environment) {
-        this.environment = environment;
+    public VkBot(Config config) {
+        this.config = config;
     }
 
     @Override
     public String getAccessToken() {
-        return environment.getProperty("client.secret");
+        return config.getClientSecret();
     }
 
     @Override
     public void onMessageNew(MessageNew messageNew) {
         Message message = messageNew.getMessage();
-        if (message.getText() != null) {
-            User user = new User();
-            user.setPeerId(message.getPeerId());
-            String defaultMessage = "Добро пожаловать в студию красоты SlyFox! 🌟\n" +
-                    "Я готов помочь вам стать ещё красивее! 💅\n" +
-                    "Пожалуйста, выберете соотвествующий пункт меню!";
-            try {
-                vk.messages.send()
-                        .setPeerId(message.getPeerId())
-                        .setMessage(defaultMessage)
-                        .setKeyboard(createKeyboardWelcomeMenu())
-                        .execute();
+        var textM = message.getText();
+        var idM = message.getPeerId();
+        LOG.info("Получено сообщение от пользователя " + idM + "с текстом: " + "\n" + textM);
 
-            } catch (VkApiException e) {
-                throw new RuntimeException(e);
-            }
+        if (messageNew.getMessage().hasText()) {
+            welcomeMessage.sendWelcomeMessageAndKeyboard(vk ,message);
         }
+
     }
 
 
