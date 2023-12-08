@@ -32,12 +32,11 @@ public class VkBot extends LongPollBot {
         Message message = messageNew.getMessage();
         var textM = message.getText();
         var idM = message.getPeerId();
-        LOG.info("Получено сообщение от пользователя " + idM + "с текстом: " + "\n" + textM);
+        LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
 
         if (messageNew.getMessage().hasText()) {
             welcomeMessage.sendWelcomeMessageAndKeyboard(vk ,message);
         }
-
     }
 
 

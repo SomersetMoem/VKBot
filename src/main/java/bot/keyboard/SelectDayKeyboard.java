@@ -13,8 +13,7 @@ import java.util.stream.IntStream;
 
 import static helpers.DateUtils.getCountDayOfMonth;
 
-public class SelectDayKeyboard {
-    private static final Button.Color PRIMARY_COLOR = Button.Color.PRIMARY;
+public class SelectDayKeyboard extends KeyboardAbstract {
 
     public Keyboard createKeyBoardSelectDay() {
         int countDayOfMonth = getCountDayOfMonth(1);
@@ -24,7 +23,7 @@ public class SelectDayKeyboard {
                 .mapToObj(i -> {
                     payload.addProperty("selectDayMenu", String.valueOf(i));  // исправление: использовать значение i
                     return new TextButton(PRIMARY_COLOR,
-                            new TextButton.Action(String.valueOf(i), payload));  // исправление: закрыть блок Action
+                            new TextButton.Action(String.valueOf(i), payload));
                 })
                 .collect(Collectors.toList());
 

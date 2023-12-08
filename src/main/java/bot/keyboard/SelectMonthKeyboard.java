@@ -13,8 +13,7 @@ import java.util.stream.IntStream;
 
 import static helpers.DateUtils.getNameMonthOfNumber;
 
-public class SelectMonthKeyboard {
-    private static final Button.Color PRIMARY_COLOR = Button.Color.PRIMARY;
+public class SelectMonthKeyboard extends KeyboardAbstract{
 
     public Keyboard createKeyboardSelectMonth() {
         JsonObject payload = new JsonObject();
