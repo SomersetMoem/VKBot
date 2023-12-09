@@ -5,9 +5,6 @@ import bot.keyboard.SelectMonthKeyboard;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,20 +12,14 @@ import java.util.Map;
 @Getter
 @Setter
 @Data
-@Configuration
-@PropertySource("classpath:menu.properties")
 public class Menu {
-    @Value("${bookProcedure}")
-    private String bookProcedure;
+    private String bookProcedure = "Записаться на процедуру";
 
-    @Value("${checkMyProcedure}")
-    private String checkMyProcedure;
+    private String checkMyProcedure = "Когда я записан?";
 
-    @Value("${priceList}")
-    private String priceList;
+    private String priceList = "Какая стоимость?";
 
-    @Value("${canselMyProcedure}")
-    private String canselMyProcedure;
+    private String canselMyProcedure = "Отменить запись";
 
     public static Map<String, KeyboardAbstract> getMapSelectWelcomeMenuEngkey() {
         Map<String, KeyboardAbstract> payloadToMethodMap = new HashMap<>();

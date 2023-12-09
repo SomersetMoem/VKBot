@@ -14,6 +14,7 @@ import static helpers.DateUtils.getNameMonthOfNumber;
 
 public class SelectMonthKeyboard extends KeyboardAbstract {
     private final Logger LOG = Logger.getLogger(SelectMonthKeyboard.class);
+
     @Override
     public Keyboard generateKeyboard() {
         LOG.info("Создаем клавиатуру для выбора месяца");
@@ -24,10 +25,16 @@ public class SelectMonthKeyboard extends KeyboardAbstract {
                     return new TextButton(PRIMARY_COLOR, new TextButton.Action(String.valueOf(i), payload));
                 })
                 .collect(Collectors.toList());
-        List<List<Button>> buttonMenu = partitionList(buttons, 5);
 
+        // Добавляем кнопку "назад"
+        JsonObject backPayload = new JsonObject();
+        backPayload.addProperty("selectMonthMenu", "back");
+        TextButton backButton = new TextButton(PRIMARY_COLOR, new TextButton.Action("Назад", backPayload));
+        buttons.add(backButton);
+        List<List<Button>> buttonMenu = partitionList(buttons, 5);
         return new Keyboard(buttonMenu).setOneTime(true);
     }
+
 
     private <T> List<List<T>> partitionList(List<T> list, int size) {
         return IntStream.range(0, list.size())

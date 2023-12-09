@@ -20,7 +20,7 @@ public class WelcomeKeyboard extends KeyboardAbstract {
 
         payload = new JsonObject();
         payload.addProperty("selectMenu", "checkMyProcedure");
-        Button checkMyProcedure = new TextButton(PRIMARY_COLOR, new TextButton.Action(CHECK_MY_PROCEDURE_TEXT, payload));
+        Button checkMyProcedure = new TextButton(POSITIVE_COLOR, new TextButton.Action(CHECK_MY_PROCEDURE_TEXT, payload));
 
         payload = new JsonObject();
         payload.addProperty("selectMenu", "priceList");
