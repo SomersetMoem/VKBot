@@ -3,7 +3,7 @@ package bot;
 import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.model.events.messages.MessageNew;
 import api.longpoll.bots.model.objects.basic.Message;
-import bot.service.WelcomeService;
+import bot.keyboard.KeyboardAbstract;
 import helpers.Config;
 import lombok.var;
 import org.apache.log4j.Logger;
@@ -11,12 +11,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static bot.keyboard.KeyboardAbstract.isButtonPayload;
+import static helpers.MessageUtils.handleButtonClick;
+import static helpers.MessageUtils.sendWelcomeMessageAndKeyboard;
+
 @Component
 @SpringBootApplication
 public class VkBot extends LongPollBot {
     private final Config config;
-    private WelcomeService welcomeMessage = new WelcomeService();
     private final static Logger LOG = Logger.getLogger(VkBot.class);
+    private Map<String, KeyboardAbstract> payloadToMethodMap = new HashMap<>();
 
     public VkBot(Config config) {
         this.config = config;
@@ -33,9 +40,10 @@ public class VkBot extends LongPollBot {
         var textM = message.getText();
         var idM = message.getPeerId();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-
-        if (messageNew.getMessage().hasText()) {
-            welcomeMessage.sendWelcomeMessageAndKeyboard(vk ,message);
+        if (messageNew.getMessage().hasText() && !isButtonPayload(textM)) {
+            sendWelcomeMessageAndKeyboard(vk, message);
+        } else {
+            handleButtonClick(vk, message);
         }
     }
 

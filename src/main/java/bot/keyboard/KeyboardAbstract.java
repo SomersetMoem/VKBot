@@ -1,6 +1,10 @@
 package bot.keyboard;
 
+import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.additional.buttons.Button;
+
+import static helpers.StringUtils.removeBracketsAndContents;
+import static model.Menu.getMapSelectWelcomeMenuRuKey;
 
 public abstract class KeyboardAbstract {
     protected static final Button.Color PRIMARY_COLOR = Button.Color.PRIMARY;
@@ -10,7 +14,12 @@ public abstract class KeyboardAbstract {
     protected final static String CANSEL_MY_PROCEDURE_TEXT = "Отменить запись";
     protected static final Button.Color POSITIVE_COLOR = Button.Color.POSITIVE;
     protected static final Button.Color NEGATIVE_COLOR = Button.Color.NEGATIVE;
-    protected boolean isButtonPayload(String text) {
-        return text.contains("{") && text.contains("}");
+
+    public static boolean isButtonPayload(String text) {
+        String key = removeBracketsAndContents(text);
+        return getMapSelectWelcomeMenuRuKey().containsKey(key.trim());
     }
+
+    public abstract Keyboard generateKeyboard();
+
 }
