@@ -25,6 +25,7 @@ public class MessageText {
     public static Map<String, String> getMapMessageText() {
         Map<String, String> payloadToMethodMap = new HashMap<>();
         payloadToMethodMap.put("bookProcedure", messageText.monthSelectMessage);
+        payloadToMethodMap.put("selectMonthMenu", messageText.daySelectMessage);
         payloadToMethodMap.put("checkMyProcedure", "В разработке");
         payloadToMethodMap.put("priceList", "В разработке");
         payloadToMethodMap.put("canselMyProcedure", "В разработке");

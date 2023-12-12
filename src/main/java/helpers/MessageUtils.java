@@ -9,7 +9,7 @@ import lombok.var;
 import model.Menu;
 import model.MessageText;
 
-import static helpers.JsonUtils.getValueForKey;
+import static helpers.JsonUtils.getKeyFromJson;
 import static model.Menu.getMapSelectWelcomeMenuEngkey;
 import static model.MessageText.getMapMessageText;
 
@@ -19,7 +19,7 @@ public class MessageUtils {
     static Menu menu = new Menu();
 
     public static Keyboard handleButtonClick(VkBotsMethods vk, Message message) {
-        var payload = getValueForKey(String.valueOf(message.getPayload()));
+        var payload = getKeyFromJson(String.valueOf(message.getPayload()));
         if (getMapSelectWelcomeMenuEngkey().containsKey(payload)) {
             var keyboardGenerator = getMapSelectWelcomeMenuEngkey().get(payload);
             var keyboard = keyboardGenerator.generateKeyboard();
@@ -30,10 +30,11 @@ public class MessageUtils {
                         .setMessage(messageText)
                         .setKeyboard(keyboard)
                         .execute();
-
             } catch (VkApiException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            sendWelcomeMessageAndKeyboard(vk, message);
         }
         return null;
     }

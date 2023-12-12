@@ -15,19 +15,19 @@ public class WelcomeKeyboard extends KeyboardAbstract {
     public Keyboard generateKeyboard() {
         LOG.info("Cоздаем клавиатуру основного меню");
         JsonObject payload = new JsonObject();
-        payload.addProperty("selectMenu", "bookProcedure");
+        payload.addProperty("bookProcedure", "bookProcedure");
         Button bookProcedure = new TextButton(POSITIVE_COLOR, new TextButton.Action(BOOK_PROCEDURE_TEXT, payload));
 
         payload = new JsonObject();
-        payload.addProperty("selectMenu", "checkMyProcedure");
+        payload.addProperty("checkMyProcedure", "checkMyProcedure");
         Button checkMyProcedure = new TextButton(POSITIVE_COLOR, new TextButton.Action(CHECK_MY_PROCEDURE_TEXT, payload));
 
         payload = new JsonObject();
-        payload.addProperty("selectMenu", "priceList");
+        payload.addProperty("priceList", "priceList");
         Button priceList = new TextButton(POSITIVE_COLOR, new TextButton.Action(PRICE_LIST_TEXT, payload));
 
         payload = new JsonObject();
-        payload.addProperty("selectMenu", "canselMyProcedure");
+        payload.addProperty("canselMyProcedure", "canselMyProcedure");
         Button canselMyProcedure = new TextButton(NEGATIVE_COLOR, new TextButton.Action(CANSEL_MY_PROCEDURE_TEXT, payload));
 
         List<List<Button>> buttonMenu = Arrays.asList(

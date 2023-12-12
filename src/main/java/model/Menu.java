@@ -1,6 +1,7 @@
 package model;
 
 import bot.keyboard.KeyboardAbstract;
+import bot.keyboard.SelectDayKeyboard;
 import bot.keyboard.SelectMonthKeyboard;
 import lombok.Data;
 import lombok.Getter;
@@ -27,15 +28,7 @@ public class Menu {
         payloadToMethodMap.put("checkMyProcedure", new SelectMonthKeyboard());
         payloadToMethodMap.put("priceList", new SelectMonthKeyboard());
         payloadToMethodMap.put("canselMyProcedure", new SelectMonthKeyboard());
-        return payloadToMethodMap;
-    }
-
-    public static Map<String, KeyboardAbstract> getMapSelectWelcomeMenuRuKey() {
-        Map<String, KeyboardAbstract> payloadToMethodMap = new HashMap<>();
-        payloadToMethodMap.put("Записаться на процедуру", new SelectMonthKeyboard());
-        payloadToMethodMap.put("Когда я записан?", new SelectMonthKeyboard());
-        payloadToMethodMap.put("Какая стоимость?", new SelectMonthKeyboard());
-        payloadToMethodMap.put("Отменить запись", new SelectMonthKeyboard());
+        payloadToMethodMap.put("selectMonthMenu", new SelectDayKeyboard());
         return payloadToMethodMap;
     }
 }

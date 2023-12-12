@@ -3,7 +3,6 @@ package bot;
 import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.model.events.messages.MessageNew;
 import api.longpoll.bots.model.objects.basic.Message;
-import bot.keyboard.KeyboardAbstract;
 import helpers.Config;
 import lombok.var;
 import model.Menu;
@@ -13,12 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static bot.keyboard.KeyboardAbstract.isButtonPayload;
 import static helpers.MessageUtils.handleButtonClick;
-import static helpers.MessageUtils.sendWelcomeMessageAndKeyboard;
 
 @Component
 @SpringBootApplication
@@ -45,11 +39,7 @@ public class VkBot extends LongPollBot {
         var textM = message.getText();
         var idM = message.getPeerId();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-        if (messageNew.getMessage().hasText() && !isButtonPayload(textM)) {
-            sendWelcomeMessageAndKeyboard(vk, message);
-        } else {
-            handleButtonClick(vk, message);
-        }
+        handleButtonClick(vk, message);
     }
 
     public static void main(String[] args) {

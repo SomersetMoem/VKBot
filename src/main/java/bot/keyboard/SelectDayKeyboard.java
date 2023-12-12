@@ -22,15 +22,24 @@ public class SelectDayKeyboard extends KeyboardAbstract {
         LOG.info("Создаем клавиатуру для выбора дня записи");
         int countDayOfMonth = getCountDayOfMonth(1);
         JsonObject payload = new JsonObject();
-        List<Button> buttons = IntStream.range(1, countDayOfMonth + 1)  // исправление: использовать countDayOfMonth + 1
+        List<Button> buttons = IntStream.range(1, countDayOfMonth + 1)
                 .mapToObj(i -> {
-                    payload.addProperty("selectDayMenu", String.valueOf(i));  // исправление: использовать значение i
-                    return new TextButton(PRIMARY_COLOR,
-                            new TextButton.Action(String.valueOf(i), payload));
+                    payload.addProperty("selectDayMenu", String.valueOf(i));
+                    return new TextButton(PRIMARY_COLOR, new TextButton.Action(String.valueOf(i), payload));
                 })
                 .collect(Collectors.toList());
 
-        List<List<Button>> buttonMenu = new ArrayList<>(Collections.singletonList(buttons));
+        List<List<Button>> buttonMenu = partitionList(buttons, 5);
         return new Keyboard(buttonMenu).setOneTime(true);
+    }
+
+    private <T> List<List<T>> partitionList(List<T> list, int size) {
+        return IntStream.range(0, list.size())
+                .boxed()
+                .collect(Collectors.groupingBy(index -> index / size))
+                .values()
+                .stream()
+                .map(indices -> indices.stream().map(list::get).collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 }

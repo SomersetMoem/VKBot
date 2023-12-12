@@ -21,11 +21,11 @@ public class SelectMonthKeyboard extends KeyboardAbstract {
         JsonObject payload = new JsonObject();
         List<Button> buttons = IntStream.range(1, 13)
                 .mapToObj(i -> {
-                    payload.addProperty("selectMonthMenu", String.valueOf(getNameMonthOfNumber(i)));
-                    return new TextButton(PRIMARY_COLOR, new TextButton.Action(String.valueOf(i), payload));
+                    String monthName = getNameMonthOfNumber(i);
+                    payload.addProperty("selectMonthMenu", monthName);
+                    return new TextButton(PRIMARY_COLOR, new TextButton.Action(monthName, payload));
                 })
                 .collect(Collectors.toList());
-
         // Добавляем кнопку "назад"
         JsonObject backPayload = new JsonObject();
         backPayload.addProperty("selectMonthMenu", "back");
