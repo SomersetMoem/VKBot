@@ -23,11 +23,10 @@ import static helpers.MessageUtils.sendWelcomeMessageAndKeyboard;
 @Component
 @SpringBootApplication
 public class VkBot extends LongPollBot {
+    private final static Logger LOG = Logger.getLogger(VkBot.class);
     private final Config config;
     private final Menu menu;
     private final MessageText messageText;
-    private final static Logger LOG = Logger.getLogger(VkBot.class);
-    private Map<String, KeyboardAbstract> payloadToMethodMap = new HashMap<>();
 
     public VkBot(Config config, Menu menu, MessageText messageText) {
         this.config = config;
