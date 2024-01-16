@@ -3,6 +3,7 @@ package model;
 import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.SelectDayKeyboard;
 import bot.keyboard.SelectMonthKeyboard;
+import bot.keyboard.SelectTimeKeyboard;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Menu {
         payloadToMethodMap.put("priceList", new SelectMonthKeyboard());
         payloadToMethodMap.put("canselMyProcedure", new SelectMonthKeyboard());
         payloadToMethodMap.put("selectMonthMenu", new SelectDayKeyboard());
+        payloadToMethodMap.put("selectDayMenu", new SelectTimeKeyboard());
         return payloadToMethodMap;
     }
 }

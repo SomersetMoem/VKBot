@@ -31,7 +31,7 @@ public class SelectMonthKeyboard extends KeyboardAbstract {
         backPayload.addProperty("selectMonthMenu", "back");
         TextButton backButton = new TextButton(PRIMARY_COLOR, new TextButton.Action("Назад", backPayload));
         buttons.add(backButton);
-        List<List<Button>> buttonMenu = partitionList(buttons, 5);
+        List<List<Button>> buttonMenu = partitionList(buttons, 3);
         return new Keyboard(buttonMenu).setOneTime(true);
     }
 

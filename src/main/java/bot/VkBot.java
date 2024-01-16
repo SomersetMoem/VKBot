@@ -10,11 +10,9 @@ import model.MessageText;
 import org.apache.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
 
 import static helpers.MessageUtils.handleButtonClick;
 
-@Component
 @SpringBootApplication
 public class VkBot extends LongPollBot {
     private final static Logger LOG = Logger.getLogger(VkBot.class);

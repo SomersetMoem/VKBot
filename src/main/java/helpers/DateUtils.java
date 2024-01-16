@@ -13,7 +13,6 @@ import java.util.Locale;
 public class DateUtils {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-    private static final String month[] = new String[] {"Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь", "Декабрь"};
     private static final Locale ruLocale = new Locale("ru");
 
 
@@ -29,8 +28,9 @@ public class DateUtils {
     }
 
     public static String getNameMonthOfNumber(int monthNumber) {
-        DateFormatSymbols symbols = new DateFormatSymbols(Locale.getDefault());
-        String[] monthNames = symbols.getMonths();
-        return monthNames[monthNumber - 1];
+        Month jan = Month.of(monthNumber);
+        Locale loc = Locale.forLanguageTag("ru");
+        String nameMonth = jan.getDisplayName(TextStyle.FULL_STANDALONE, loc);
+        return nameMonth.substring(0, 1).toUpperCase() + nameMonth.substring(1).toLowerCase();
     }
 }

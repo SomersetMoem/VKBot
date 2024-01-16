@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Settings</title>
+</head>
+<body>
+<h1>Bot Settings</h1>
+
+<form th:action="@{/admin/settings}" method="post" th:object="${settingsForm}">
+    <label for="clientSecret">Bot Token:</label>
+    <input type="text" id="clientSecret" th:field="*{clientSecret}" required>
+
+    <!-- Добавьте другие поля для настроек -->
+
+    <button type="submit">Save Settings</button>
+</form>
+</body>
+</html>
