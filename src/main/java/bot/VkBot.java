@@ -37,7 +37,8 @@ public class VkBot extends LongPollBot {
         var textM = message.getText();
         var idM = message.getPeerId();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-        handleButtonClick(vk, message);
+        if (isAdmin(message)) {
+        handleButtonClick(vk, message);}
     }
 
     public static void main(String[] args) {
@@ -47,5 +48,11 @@ public class VkBot extends LongPollBot {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isAdmin(Message message) {
+        LOG.info("Проверяем является ли админом");
+        message.getPeerId()
+        return true;
     }
 }
