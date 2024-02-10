@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static helpers.MessageUtils.adminButtonClick;
-import static helpers.MessageUtils.userButtonClick;
 
 
 @SpringBootApplication
