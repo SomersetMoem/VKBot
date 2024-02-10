@@ -4,8 +4,8 @@ import api.longpoll.bots.exceptions.VkApiException;
 import api.longpoll.bots.methods.VkBotsMethods;
 import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
+import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.WelcomeKeyboard;
-import lombok.var;
 import model.Menu;
 import model.MessageText;
 
@@ -18,12 +18,12 @@ public class MessageUtils {
     static MessageText messageText = new MessageText();
     static Menu menu = new Menu();
 
-    public static Keyboard handleButtonClick(VkBotsMethods vk, Message message) {
-        var payload = getKeyFromJson(String.valueOf(message.getPayload()));
+    public static Keyboard userButtonClick(VkBotsMethods vk, Message message) {
+        String payload = getKeyFromJson(String.valueOf(message.getPayload()));
         if (getMapSelectWelcomeMenuEngkey().containsKey(payload)) {
-            var keyboardGenerator = getMapSelectWelcomeMenuEngkey().get(payload);
-            var keyboard = keyboardGenerator.generateKeyboard();
-            var messageText = getMapMessageText().get(payload);
+            KeyboardAbstract keyboardGenerator = getMapSelectWelcomeMenuEngkey().get(payload);
+            Keyboard keyboard = keyboardGenerator.generateKeyboard();
+            String messageText = getMapMessageText().get(payload);
             try {
                 vk.messages.send()
                         .setPeerId(message.getPeerId())
@@ -36,6 +36,10 @@ public class MessageUtils {
         } else {
             sendWelcomeMessageAndKeyboard(vk, message);
         }
+        return null;
+    }
+
+    public static Keyboard adminButtonClick(VkBotsMethods vk, Message message) {
         return null;
     }
 

@@ -3,12 +3,9 @@ package bot.keyboard;
 import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.additional.buttons.Button;
 import api.longpoll.bots.model.objects.additional.buttons.TextButton;
-import api.longpoll.bots.model.objects.basic.Message;
 import com.google.gson.JsonObject;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

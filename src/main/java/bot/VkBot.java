@@ -4,14 +4,15 @@ import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.model.events.messages.MessageNew;
 import api.longpoll.bots.model.objects.basic.Message;
 import helpers.Config;
-import lombok.var;
 import model.Menu;
 import model.MessageText;
 import org.apache.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static helpers.MessageUtils.handleButtonClick;
+import static helpers.MessageUtils.adminButtonClick;
+import static helpers.MessageUtils.userButtonClick;
+
 
 @SpringBootApplication
 public class VkBot extends LongPollBot {
@@ -34,11 +35,15 @@ public class VkBot extends LongPollBot {
     @Override
     public void onMessageNew(MessageNew messageNew) {
         Message message = messageNew.getMessage();
-        var textM = message.getText();
-        var idM = message.getPeerId();
+        String textM = message.getText();
+        int idM = message.getPeerId();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-        if (isAdmin(message)) {
-        handleButtonClick(vk, message);}
+
+        if (textM.contains("/admin") && isAdmin(idM)) {
+            adminButtonClick(vk, message);
+        } else {
+            userButtonClick(vk, message);
+        }
     }
 
     public static void main(String[] args) {
@@ -50,9 +55,12 @@ public class VkBot extends LongPollBot {
         }
     }
 
-    private boolean isAdmin(Message message) {
+    private boolean isAdmin(int peerId) {
         LOG.info("Проверяем является ли админом");
-        message.getPeerId()
-        return true;
+        boolean isAdmin = false;
+        if (peerId != 0) {
+            isAdmin = peerId == config.getPeerIdAdmin();
+        }
+        return isAdmin;
     }
 }

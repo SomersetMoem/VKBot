@@ -16,10 +16,13 @@ import static helpers.MessageUtils.messageText;
 @Setter
 @Data
 @Configuration
-@PropertySource("classpath:vk.properties")
+@PropertySource("classpath:application.properties")
 public class Config {
     @Value("${client.secret}")
     private String clientSecret;
+
+    @Value("${peer.id.admin}")
+    private int peerIdAdmin;
 
     @Override
     public String toString() {
