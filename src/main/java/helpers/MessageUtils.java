@@ -6,17 +6,18 @@ import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
 import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.WelcomeKeyboard;
-import model.Menu;
-import model.MessageText;
+import bot.model.Menu;
+import bot.model.MessageText;
 
 import static helpers.JsonUtils.getKeyFromJson;
-import static model.Menu.getMapSelectWelcomeMenuEngkey;
-import static model.MessageText.getMapMessageText;
+import static bot.model.Menu.getMapSelectWelcomeMenuEngkey;
+import static bot.model.MessageText.getMapMessageText;
 
 public class MessageUtils {
     static WelcomeKeyboard welcomeKeyboard = new WelcomeKeyboard();
     static MessageText messageText = new MessageText();
-    static Menu menu = new Menu();
+    public static Menu menu = new Menu();
+
 
     public static Keyboard userButtonClick(VkBotsMethods vk, Message message) {
         String payload = getKeyFromJson(String.valueOf(message.getPayload()));

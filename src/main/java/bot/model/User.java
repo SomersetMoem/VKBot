@@ -1,4 +1,4 @@
-package model;
+package bot.model;
 
 import lombok.Data;
 import lombok.Getter;

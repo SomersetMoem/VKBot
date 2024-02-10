@@ -1,4 +1,4 @@
-package model;
+package bot.model;
 
 import lombok.Data;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.Map;
 @Setter
 @Data
 public class MessageText {
-    static MessageText messageText = new MessageText();
+    public static MessageText messageText = new MessageText();
     private String welcomeMessage = "Добро пожаловать в студию красоты SlyFox! \uD83C\uDF1F\n" +
             "Я готов помочь вам стать ещё красивее! \uD83D\uDC85\n" +
             "Пожалуйста, выберете соответствующий пункт меню!";

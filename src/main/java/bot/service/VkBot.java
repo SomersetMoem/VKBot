@@ -1,24 +1,29 @@
-package bot;
+package bot.service;
 
 import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.model.events.messages.MessageNew;
 import api.longpoll.bots.model.objects.basic.Message;
-import helpers.Config;
-import model.Menu;
-import model.MessageText;
+import bot.Config;
+import bot.model.Menu;
+import bot.model.MessageText;
+import bot.model.UserRepository;
+import bot.model.UsersTable;
 import org.apache.log4j.Logger;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static helpers.MessageUtils.adminButtonClick;
+import static helpers.MessageUtils.userButtonClick;
 
-
-@SpringBootApplication
+@Component
 public class VkBot extends LongPollBot {
     private final static Logger LOG = Logger.getLogger(VkBot.class);
     private final Config config;
     private final Menu menu;
     private final MessageText messageText;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public VkBot(Config config, Menu menu, MessageText messageText) {
         this.config = config;
@@ -36,21 +41,12 @@ public class VkBot extends LongPollBot {
         Message message = messageNew.getMessage();
         String textM = message.getText();
         int idM = message.getPeerId();
+        registration();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-
         if (textM.contains("/admin") && isAdmin(idM)) {
             adminButtonClick(vk, message);
         } else {
             userButtonClick(vk, message);
-        }
-    }
-
-    public static void main(String[] args) {
-        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class)) {
-            VkBot bot = context.getBean(VkBot.class);
-            bot.startPolling();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -61,5 +57,12 @@ public class VkBot extends LongPollBot {
             isAdmin = peerId == config.getPeerIdAdmin();
         }
         return isAdmin;
+    }
+
+    public void registration() {
+        UsersTable usersTable = new UsersTable();
+        usersTable.setPeerId(12);
+        usersTable.setFullName("фыв фывф фыв");
+        userRepository.findAll();
     }
 }

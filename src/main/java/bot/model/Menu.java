@@ -1,4 +1,4 @@
-package model;
+package bot.model;
 
 import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.SelectDayKeyboard;

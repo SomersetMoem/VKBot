@@ -1,4 +1,4 @@
-package bot.dataSql;
+package bot.model;
 
 
 import lombok.Data;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name="users")
-public class UserTable {
+@Table(name="Users")
+public class UsersTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
