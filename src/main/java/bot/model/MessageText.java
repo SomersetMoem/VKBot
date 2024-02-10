@@ -3,13 +3,14 @@ package bot.model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
 @Setter
-@Data
+@Component
 public class MessageText {
     public static MessageText messageText = new MessageText();
     private String welcomeMessage = "Добро пожаловать в студию красоты SlyFox! \uD83C\uDF1F\n" +
