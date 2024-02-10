@@ -7,9 +7,7 @@ import bot.Config;
 import bot.model.Menu;
 import bot.model.MessageText;
 import bot.model.UserRepository;
-import bot.model.UsersTable;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static helpers.MessageUtils.adminButtonClick;
@@ -22,13 +20,13 @@ public class VkBot extends LongPollBot {
     private final Menu menu;
     private final MessageText messageText;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public VkBot(Config config, Menu menu, MessageText messageText) {
+    public VkBot(Config config, Menu menu, MessageText messageText, UserRepository userRepository) {
         this.config = config;
         this.menu = menu;
         this.messageText = messageText;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -60,9 +58,6 @@ public class VkBot extends LongPollBot {
     }
 
     public void registration() {
-        UsersTable usersTable = new UsersTable();
-        usersTable.setPeerId(12);
-        usersTable.setFullName("фыв фывф фыв");
         userRepository.findAll();
     }
 }
