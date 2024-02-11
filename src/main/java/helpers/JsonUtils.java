@@ -11,18 +11,24 @@ import java.util.Map;
 public class JsonUtils {
     private final static Logger LOG = Logger.getLogger(JsonUtils.class);
 
-    public static String getValueForKey(String jsonString) {
-        LOG.info("Извлекаем значение из json: " + jsonString);
+    public static String getValueForKey(String key, String jsonString) {
+        LOG.info("Извлекаем значение из JSON: " + jsonString);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            JsonNode firstValue = jsonNode.elements().next();
-            if (firstValue != null && firstValue.isTextual()) {
-                return firstValue.asText();
+            JsonNode responseNode = jsonNode.get("response");
+            if (responseNode != null && responseNode.isArray() && responseNode.size() > 0) {
+                JsonNode firstElement = responseNode.get(0);
+                JsonNode valueNode = firstElement.get(key);
+                if (valueNode != null && valueNode.isTextual()) {
+                    return valueNode.asText();
+                } else {
+                    LOG.warn("Не удалось извлечь значение для ключа");
+                }
             } else {
-                LOG.warn("Не удалось извлечь значение из JSON");
+                LOG.warn("Отсутствует массив 'response' или он пуст в JSON");
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("Ошибка при обработке JSON", e);
         }
         return null;
@@ -45,4 +51,8 @@ public class JsonUtils {
         }
         return null;
     }
+
+
+
+
 }

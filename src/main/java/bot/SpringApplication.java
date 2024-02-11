@@ -1,9 +1,9 @@
 package bot;
 
+import bot.config.Config;
 import bot.service.VkBot;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class SpringApplication {

@@ -1,19 +1,12 @@
-package bot;
+package bot.config;
 
-import bot.model.UserRepository;
-import bot.service.VkBot;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
-import static bot.model.MessageText.messageText;
-import static helpers.MessageUtils.menu;
 
 @Getter
 @Setter

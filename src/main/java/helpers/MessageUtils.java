@@ -4,14 +4,18 @@ import api.longpoll.bots.exceptions.VkApiException;
 import api.longpoll.bots.methods.VkBotsMethods;
 import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
+import bot.config.Config;
 import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.WelcomeKeyboard;
 import bot.model.Menu;
 import bot.model.MessageText;
 
-import static helpers.JsonUtils.getKeyFromJson;
+import java.io.IOException;
+
 import static bot.model.Menu.getMapSelectWelcomeMenuEngkey;
 import static bot.model.MessageText.getMapMessageText;
+import static helpers.JsonUtils.getKeyFromJson;
+import static helpers.JsonUtils.getValueForKey;
 
 public class MessageUtils {
     static WelcomeKeyboard welcomeKeyboard = new WelcomeKeyboard();
