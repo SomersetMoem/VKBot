@@ -4,13 +4,9 @@ import api.longpoll.bots.exceptions.VkApiException;
 import api.longpoll.bots.methods.VkBotsMethods;
 import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
-import bot.config.Config;
 import bot.keyboard.KeyboardAbstract;
 import bot.keyboard.WelcomeKeyboard;
-import bot.model.Menu;
 import bot.model.MessageText;
-
-import java.io.IOException;
 
 import static bot.model.Menu.getMapSelectWelcomeMenuEngkey;
 import static bot.model.MessageText.getMapMessageText;
@@ -20,11 +16,10 @@ import static helpers.JsonUtils.getValueForKey;
 public class MessageUtils {
     static WelcomeKeyboard welcomeKeyboard = new WelcomeKeyboard();
     static MessageText messageText = new MessageText();
-    public static Menu menu = new Menu();
 
 
     public static Keyboard userButtonClick(VkBotsMethods vk, Message message) {
-        String payload = getKeyFromJson(String.valueOf(message.getPayload()));
+        String payload = getValueForKey("name",String.valueOf(message.getPayload()));
         if (getMapSelectWelcomeMenuEngkey().containsKey(payload)) {
             KeyboardAbstract keyboardGenerator = getMapSelectWelcomeMenuEngkey().get(payload);
             Keyboard keyboard = keyboardGenerator.generateKeyboard();

@@ -1,23 +1,15 @@
 package bot.service;
 
 import api.longpoll.bots.LongPollBot;
-import api.longpoll.bots.methods.impl.users.Get;
-import api.longpoll.bots.methods.impl.users.Get.ResponseBody;
 import api.longpoll.bots.model.events.messages.MessageNew;
-import api.longpoll.bots.model.objects.additional.NameCase;
 import api.longpoll.bots.model.objects.basic.Message;
-import api.longpoll.bots.model.objects.basic.User;
 import bot.commands.WelcomeCommands;
 import bot.config.Config;
 import bot.model.Menu;
 import bot.model.MessageText;
-import bot.model.UserRepository;
+import bot.model.UsersRepository;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import static helpers.MessageUtils.adminButtonClick;
 import static helpers.MessageUtils.userButtonClick;
@@ -30,17 +22,17 @@ public class VkBot extends LongPollBot {
     private final Menu menu;
     private final MessageText messageText;
 
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
-    public VkBot(Config config, Menu menu, MessageText messageText, UserRepository userRepository) {
+    public VkBot(Config config, Menu menu, MessageText messageText, UsersRepository usersRepository) {
         this.config = config;
         this.menu = menu;
         this.messageText = messageText;
-        this.userRepository = userRepository;
+        this.usersRepository = usersRepository;
     }
 
-    public UserRepository getUserRepository() {
-        return userRepository;
+    public UsersRepository getUserRepository() {
+        return usersRepository;
     }
 
     @Override
@@ -54,7 +46,7 @@ public class VkBot extends LongPollBot {
         String textM = message.getText();
         int idM = message.getPeerId();
         LOG.info("Получено сообщение от пользователя: \n" + idM + "С текстом: " + textM);
-        welcomeCommands.checkUserFirstRequest(message, config, userRepository);
+        welcomeCommands.checkUserFirstRequest(message, config, usersRepository);
 
         if (textM.contains("/admin") && isAdmin(idM)) {
             adminButtonClick(vk, message);

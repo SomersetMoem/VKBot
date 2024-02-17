@@ -26,7 +26,12 @@ public class JsonUtils {
                     LOG.warn("Не удалось извлечь значение для ключа");
                 }
             } else {
-                LOG.warn("Отсутствует массив 'response' или он пуст в JSON");
+                JsonNode valueNode = jsonNode.get(key);
+                if (valueNode != null && valueNode.isTextual()) {
+                    return valueNode.asText();
+                } else {
+                    LOG.warn("Не удалось извлечь значение для ключа");
+                }
             }
         } catch (Exception e) {
             LOG.error("Ошибка при обработке JSON", e);
@@ -51,8 +56,6 @@ public class JsonUtils {
         }
         return null;
     }
-
-
 
 
 }

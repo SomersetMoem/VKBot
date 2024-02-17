@@ -1,21 +1,28 @@
 package bot.commands;
 
 import api.longpoll.bots.model.objects.basic.Message;
-import api.longpoll.bots.model.objects.basic.User;
 import bot.config.Config;
-import bot.model.UserRepository;
-import bot.model.Users;
-import bot.service.VkBot;
-import helpers.DataUtils;
-import helpers.MessageUtils;
+import bot.model.UsersRepository;
 import org.apache.log4j.Logger;
+
+import java.util.stream.StreamSupport;
+
+import static helpers.DbUtils.saveUserForDb;
 
 public class WelcomeCommands {
     private final static Logger LOG = Logger.getLogger(WelcomeCommands.class);
 
-    public void checkUserFirstRequest(Message message, Config config, UserRepository userRepository) {
-        LOG.info("Проверяем, что пользователь с peerID [" + message.getPeerId() + "] обращается впервые" );
-        if ()
+    public void checkUserFirstRequest(Message message, Config config, UsersRepository usersRepository) {
+        LOG.info("Проверяем, что пользователь с peerID [" + message.getPeerId() + "] обращается впервые");
+        Integer peerId = message.getPeerId();
 
+        boolean userExist = StreamSupport.stream(usersRepository
+                        .findAll()
+                        .spliterator(), false)
+                .anyMatch(users -> users.getPeer_id().equals(peerId));
+
+        if (!userExist) {
+            saveUserForDb(message, config, usersRepository);
+        }
     }
 }

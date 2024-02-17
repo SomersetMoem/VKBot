@@ -16,7 +16,6 @@ public class DataUtils {
             throw new RuntimeException(e);
         }
         String name = getValueForKey("first_name", request);
-        String lastName = getValueForKey("last_name", request);
         return name;
     }
 
