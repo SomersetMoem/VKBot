@@ -21,4 +21,15 @@ public class Users {
     private String name;
     private String last_name;
     private Timestamp registered_at;
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", peer_id=" + peer_id +
+                ", name='" + name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", registered_at=" + registered_at +
+                '}';
+    }
 }

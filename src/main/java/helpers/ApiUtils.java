@@ -7,7 +7,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class ApiUtils {
-
     private static String vkApi = "https://api.vk.com";
     public static String getRequest(String url) throws IOException {
         URL uri = new URL(vkApi + url);
