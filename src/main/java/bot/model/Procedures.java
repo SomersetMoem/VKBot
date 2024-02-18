@@ -15,7 +15,7 @@ public class Procedures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameProcedure;
+    private String name_procedure;
     private Integer price;
     private String description;
 }

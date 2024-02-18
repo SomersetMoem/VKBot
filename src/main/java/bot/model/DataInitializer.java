@@ -18,20 +18,21 @@ public class DataInitializer {
     }
 
 
-    public void initializeDataProcedure() {
-        LOG.info("Заполняем таблицу Procedure");
+    public void initializeDataProcedures() {
+        LOG.info("Заполняем таблицу Procedures");
         if (checkTableProceduresIsEmpty() == 0) {
-            String insertQuery = "INSERT INTO your_table_name (column1, column2, column3) VALUES (?, ?, ?)";
-            jdbcTemplate.update(insertQuery, "value1", "value2", "value3");
-            jdbcTemplate.update(insertQuery, "value4", "value5", "value6");
+            String insertQuery = "INSERT INTO Procedures(name_procedure, price, description) VALUES (?, ?, ?)";
+            jdbcTemplate.update(insertQuery, "Наращивание ресниц классика", 700, "Классическое наращивание ресниц");
+            jdbcTemplate.update(insertQuery, "Наращивание ресниц 2Д", 999, "Наращивание ресниц методом 2D");
+            jdbcTemplate.update(insertQuery, "Наращивание уголков глаз", 500, "Наращивание уголков глаз для эффектного взгляда");
         } else {
             LOG.info("Таблица Procedure уже заполнена данными");
         }
     }
 
     public int checkTableProceduresIsEmpty() {
-        LOG.info("Проверяем наличие данных в таблице Procedure");
-        String countQuery = "SELECT COUNT(*) FROM your_table_name";
+        LOG.info("Проверяем наличие данных в таблице Procedures");
+        String countQuery = "SELECT COUNT(*) FROM Procedures";
         int rowCount = jdbcTemplate.queryForObject(countQuery, Integer.class);
         return rowCount;
     }

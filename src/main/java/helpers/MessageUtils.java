@@ -10,7 +10,6 @@ import bot.model.MessageText;
 
 import static bot.model.Menu.getMapSelectWelcomeMenuEngkey;
 import static bot.model.MessageText.getMapMessageText;
-import static helpers.JsonUtils.getKeyFromJson;
 import static helpers.JsonUtils.getValueForKey;
 
 public class MessageUtils {
@@ -19,7 +18,7 @@ public class MessageUtils {
 
 
     public static Keyboard userButtonClick(VkBotsMethods vk, Message message) {
-        String payload = getValueForKey("name",String.valueOf(message.getPayload()));
+        String payload = getValueForKey("name", String.valueOf(message.getPayload()));
         if (getMapSelectWelcomeMenuEngkey().containsKey(payload)) {
             KeyboardAbstract keyboardGenerator = getMapSelectWelcomeMenuEngkey().get(payload);
             Keyboard keyboard = keyboardGenerator.generateKeyboard();
@@ -47,7 +46,7 @@ public class MessageUtils {
         try {
             vk.messages.send()
                     .setPeerId(message.getPeerId())
-                    .setMessage(messageText.getWelcomeMessage())
+                    .setMessage(messageText.getWELCOME_MESSAGE())
                     .setKeyboard(welcomeKeyboard.generateKeyboard())
                     .execute();
         } catch (VkApiException e) {

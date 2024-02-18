@@ -322,3 +322,11 @@
 2024-02-17 13:01:20 INFO  JsonUtils:15 - Извлекаем значение из JSON: {"selectMonthMenu":"back"}
 2024-02-17 13:01:20 WARN  JsonUtils:33 - Не удалось извлечь значение для ключа
 2024-02-17 13:01:20 INFO  WelcomeKeyboard:17 - Cоздаем клавиатуру основного меню
+2024-02-18 16:15:11 INFO  DataInitializer:22 - Заполняем таблицу Procedure
+2024-02-18 16:15:11 INFO  DataInitializer:34 - Проверяем наличие данных в таблице Procedure
+2024-02-18 16:15:42 INFO  DataInitializer:22 - Заполняем таблицу Procedure
+2024-02-18 16:15:42 INFO  DataInitializer:34 - Проверяем наличие данных в таблице Procedure
+2024-02-18 16:16:27 INFO  DataInitializer:22 - Заполняем таблицу Procedures
+2024-02-18 16:16:27 INFO  DataInitializer:34 - Проверяем наличие данных в таблице Procedures
+2024-02-18 16:17:10 INFO  DataInitializer:22 - Заполняем таблицу Procedures
+2024-02-18 16:17:10 INFO  DataInitializer:34 - Проверяем наличие данных в таблице Procedures

@@ -19,7 +19,7 @@ public class WelcomeCommands {
         boolean userExist = StreamSupport.stream(usersRepository
                         .findAll()
                         .spliterator(), false)
-                .anyMatch(users -> users.getPeer_id().equals(peerId));
+                        .anyMatch(users -> users.getPeer_id().equals(peerId));
 
         if (!userExist) {
             saveUserForDb(message, config, usersRepository);
